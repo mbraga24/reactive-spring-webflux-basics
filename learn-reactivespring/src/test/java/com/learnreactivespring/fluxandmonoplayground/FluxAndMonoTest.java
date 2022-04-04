@@ -52,4 +52,12 @@ public class FluxAndMonoTest {
 			.expectNext("Reactive Spring")
 			.verifyComplete();
 	}
+	
+	@Test
+	public void fluxTestElements_WithError() {
+		Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
+				.log();
+		
+	
+	}
 }
