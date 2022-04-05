@@ -37,7 +37,7 @@ public class FluxAndMonoTest {
 		
 		stringFlux.subscribe(System.out::println, 
 				(e) -> System.err.println("The exception is: " + e),
-				() -> System.out.println("==> Completed (v)"));
+				() -> System.out.println("==> Completed(v)"));
 		
 	}
 	
