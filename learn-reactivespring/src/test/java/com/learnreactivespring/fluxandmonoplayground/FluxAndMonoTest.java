@@ -67,4 +67,17 @@ public class FluxAndMonoTest {
 			.expectErrorMessage("An Exception Occurred")
 			.verify();
 	}
+	
+	@Test
+	public void fluxTestElementsCount_WithError() {
+		Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
+				.concatWith(Flux.error(new RuntimeException("An Exception Occurred")))
+				.log();
+		
+		StepVerifier.create(stringFlux)
+			.expectNextCount(3)
+			.expectErrorMessage("An Exception Occurred")
+			.verify();
+			
+	}
 }
