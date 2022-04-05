@@ -80,4 +80,16 @@ public class FluxAndMonoTest {
 			.verify();
 			
 	}
+	
+	@Test
+	public void fluxTestElements_WithErrorExpectNextCombine() {
+		Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
+				.concatWith(Flux.error(new RuntimeException("An Error Occurred")))
+				.log();
+		
+		StepVerifier.create(stringFlux)
+			.expectNext("Spring", "Spring Boot", "Reactive Spring")
+			.expectErrorMessage("An Error Occurred")
+			.verify();
+	}
 }
