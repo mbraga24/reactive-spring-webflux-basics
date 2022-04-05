@@ -107,7 +107,7 @@ public class FluxAndMonoTest {
 	@Test
 	public void monoTest_Error() {
 		
-		StepVerifier.create(Mono.error(new RuntimeException("An Error Occurred in MonoTest_Error")))
+		StepVerifier.create(Mono.error(new RuntimeException("An Error Occurred in MonoTest_Error")).log())
 			.expectError(RuntimeException.class)
 			.verify();
 		
