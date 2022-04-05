@@ -32,7 +32,7 @@ public class FluxAndMonoTest {
 	public void fluxTest() {
 		
 		Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-//				.concatWith(Flux.error(new RuntimeException("An Exception Occurred")))
+//				.concatWith(Flux.error(new RuntimeException("An Exception Occurred in fluxTest")))
 				.concatWith(Flux.just("After Error"))
 				.log(); // will log all events happening behind the scenes
 		
@@ -57,7 +57,7 @@ public class FluxAndMonoTest {
 	@Test
 	public void fluxTestElements_WithError() {
 		Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-				.concatWith(Flux.error(new RuntimeException("An Exception Occurred")))
+				.concatWith(Flux.error(new RuntimeException("An Exception Occurred in fluxTestElements_WithError")))
 				.log();
 		
 		StepVerifier.create(stringFlux)
@@ -72,7 +72,7 @@ public class FluxAndMonoTest {
 	@Test
 	public void fluxTestElementsCount_WithError() {
 		Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-				.concatWith(Flux.error(new RuntimeException("An Exception Occurred")))
+				.concatWith(Flux.error(new RuntimeException("An Exception Occurred in fluxTestElementsCount_WithError")))
 				.log();
 		
 		StepVerifier.create(stringFlux)
@@ -85,7 +85,7 @@ public class FluxAndMonoTest {
 	@Test
 	public void fluxTestElements_WithErrorExpectNextCombine() {
 		Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-				.concatWith(Flux.error(new RuntimeException("An Error Occurred")))
+				.concatWith(Flux.error(new RuntimeException("An Error Occurred in MonoTest")))
 				.log();
 		
 		StepVerifier.create(stringFlux)
@@ -102,5 +102,14 @@ public class FluxAndMonoTest {
 		StepVerifier.create(stringMono.log())
 				.expectNext("Spring")
 				.verifyComplete();
+	}
+	
+	@Test
+	public void monoTest_Error() {
+		
+		StepVerifier.create(Mono.error(new RuntimeException("An Error Occurred in MonoTest_Error")))
+			.expectError(RuntimeException.class)
+			.verify();
+		
 	}
 }
