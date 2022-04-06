@@ -31,7 +31,7 @@ public class FluxAndMonoController {
 	@GetMapping(value = "/fluxstream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
 	public Flux<String> returnFluxStream() {
 		
-		return Flux.just("STAY ", "STRONG ", "AND ", "LEARN ", "WEBFLUX", ". ", " PEOPLE ", "ARE ", "COUNTING ", "ON ", "YOU ", "!")
+		return Flux.just("STAY ", "FOCUSED ", "AND ", "LEARN ", "WEBFLUX", ". ")
 				.delayElements(Duration.ofSeconds(1))
 				.log();
 	}

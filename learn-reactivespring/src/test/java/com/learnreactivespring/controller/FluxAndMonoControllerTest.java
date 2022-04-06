@@ -35,8 +35,20 @@ public class FluxAndMonoControllerTest {
 			.expectNext(2)
 			.expectNext(3)
 			.expectNext(4)
-			.verifyComplete();						       // verify complete event
-		
-				
+			.verifyComplete();						       // verify complete event			
 	}
+	
+	@Test
+	public void flux_approach2() {
+		
+		webTestClient.get().uri("/flux")
+				.accept(MediaType.APPLICATION_JSON_UTF8)
+				.exchange()
+				.expectStatus().isOk()
+				.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+				.expectBodyList(Integer.class)
+				.hasSize(4);
+			
+	}
+	
 }
