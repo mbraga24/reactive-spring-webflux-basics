@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class FluxAndMonoController {
@@ -28,12 +29,23 @@ public class FluxAndMonoController {
 	 * it is received from the Publiser (data producer). 
 	 * 
 	 */
+//	@GetMapping(value = "/fluxstream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+//	public Flux<String> returnFluxStream() {
+//		
+//		return Flux.just("STAY ", "FOCUSED ", "AND ", "LEARN ", "WEBFLUX", ". ")
+//				.delayElements(Duration.ofSeconds(1))
+//				.log();
+//	}
+	
 	@GetMapping(value = "/fluxstream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
-	public Flux<String> returnFluxStream() {
-		
-		return Flux.just("STAY ", "FOCUSED ", "AND ", "LEARN ", "WEBFLUX", ". ")
-				.delayElements(Duration.ofSeconds(1))
+	public Flux<Long> returnFluxStream() {
+		return Flux.interval(Duration.ofSeconds(1))
 				.log();
+	}
+	
+	@GetMapping("/mono")
+	public Mono<Integer> returnMono() {
+		return Mono.just(1).log();
 	}
 
 }
