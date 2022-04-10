@@ -41,7 +41,7 @@ public class SampleHandlerFunction {
 		
 		return ServerResponse.ok()
 				.contentType(MediaType.APPLICATION_JSON)
-				.body(Mono.just("=====> HELLO, YOU!").log(), String.class);
+				.body(Mono.just(1).log(), Integer.class);
 	}
 	
 }
